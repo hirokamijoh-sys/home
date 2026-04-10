@@ -4,8 +4,13 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY
 const ai = new GoogleGenAI({ apiKey });
 
 export async function getPraise(action: string) {
+  if (!apiKey) {
+    console.error("API Key is missing!");
+    return "ごめんねぇ、設定がうまくいってないみたい…。APIキーを確認してみてねぉ！✨";
+  }
+
   try {
-    const modelName = "gemini-3-flash-preview";
+    const modelName = "gemini-1.5-flash";
     const prompt = `あなたは、ユーザーを全力で肯定して褒めてくれる、世界一かわいいキャラクター「ほめまる」です。
 ユーザーが「${action}」ということをしました。
 この行動に対して、全力で、かわいく、優しく、そして具体的に褒めてあげてください。
